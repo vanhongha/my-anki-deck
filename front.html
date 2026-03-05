@@ -434,8 +434,9 @@
                 answerText +
                 "</label>";
           let textAlign = type == 0 ? "center" : "left";
+          let solutionValue = Number.isFinite(solutions[i]) ? solutions[i] : 0;
 
-          html.push("<tr>");
+          html.push('<tr data-solution="' + solutionValue + '">');
           var maxColumns = type == 0 ? 2 : 1;
           for (var j = 0; j < maxColumns; j++) {
             let inputTag =
@@ -464,7 +465,7 @@
 
           questionTableHtmlLinesToSolution.push({
             html: html.join(""),
-            solution: solutions[i],
+            solution: solutionValue,
           });
         }
       } else {

@@ -185,6 +185,7 @@
 
   #qtable select,
   #atable select {
+    width: 95%;
     min-height: 36px;
     border: 1px solid var(--ui-border);
     border-radius: 8px;
@@ -238,25 +239,30 @@
 
   /* Feedback signal (color is secondary, not primary) */
   .review-row.state-hit {
-    background: #eaf8ef;
+    background: #c9f3d6;
+    border-left: 5px solid #15803d;
   }
 
   .review-row.state-false-alarm {
-    background: #fdecec;
+    background: #ffd9d9;
+    border-left: 5px solid #b91c1c;
   }
 
   .review-row.state-miss {
-    background: #fff5e8;
-    border: 1px dashed #d97706;
+    background: #ffe7cc;
+    border: 2px dashed #d97706;
+    border-left: 5px solid #d97706;
   }
 
   .review-row.state-correct-reject {
-    background: #f7f8fa;
+    background: #e2e8f0;
+    border-left: 5px solid #475569;
   }
 
   .review-row.state-omitted {
-    background: #fff7ed;
-    border: 1px dashed #9ca3af;
+    background: #ffe9d5;
+    border: 2px dashed #9ca3af;
+    border-left: 5px solid #64748b;
   }
 
   .feedback-meta {
@@ -295,23 +301,30 @@
   }
 
   .feedback-chip.outcome.ok {
-    border-color: #15803d;
-    color: #166534;
+    border-color: #166534;
+    background: #bbf7d0;
+    color: #14532d;
+    font-weight: 700;
   }
 
   .feedback-chip.outcome.bad {
-    border-color: #b91c1c;
-    color: #991b1b;
+    border-color: #991b1b;
+    background: #fecaca;
+    color: #7f1d1d;
+    font-weight: 700;
   }
 
   .feedback-chip.outcome.neutral {
-    border-color: #94a3b8;
-    color: #475569;
+    border-color: #64748b;
+    background: #cbd5e1;
+    color: #334155;
+    font-weight: 700;
   }
 
   .correctHint {
     margin-top: 6px;
-    font-size: 0.6em;
+    font-size: 0.85em;
+    font-weight: 600;
   }
 
   .hidden {
@@ -671,11 +684,23 @@
         return;
       }
 
+      var canswers = 0;
       if (OPTIONS.qtable.visible) {
         var qrows = qtable
           .getElementsByTagName("tbody")[0]
           .getElementsByTagName("tr");
         for (let i = 0; i < answers.length; i++) {
+          let rowForSolution = qrows[type == 0 ? i + 1 : i];
+          let rowSolutionAttr = rowForSolution
+            ? Number(rowForSolution.getAttribute("data-solution"))
+            : NaN;
+          let fallbackSolution = Number(solutions[i]);
+          let rowSolution = Number.isFinite(rowSolutionAttr)
+            ? rowSolutionAttr
+            : Number.isFinite(fallbackSolution)
+              ? fallbackSolution
+              : 0;
+
           //Set the radio buttons in the qtable.
           if (type == 0) {
             if (answers[i] === 1) {
@@ -707,7 +732,7 @@
               kRow.classList.add("state-omitted");
               outcomeText = "✗ Miss";
               outcomeTone = "bad";
-            } else if (answerValue === solutions[i]) {
+            } else if (answerValue === rowSolution) {
               kRow.classList.add("state-hit");
               outcomeText = "✓ Correct";
               outcomeTone = "ok";
@@ -734,40 +759,39 @@
               row,
               cell,
               answers[i] === 1,
-              solutions[i] === 1,
+              rowSolution === 1,
             );
           }
+
+          if (rowSolution && answers[i] === 1) {
+            canswers = canswers + 1;
+          } else if (!rowSolution && answers[i] === 0) {
+            canswers = canswers + 1;
+          }
+
           //Colorize the qtable.
           if (OPTIONS.qtable.colorize) {
             colorizeTableRow(
               qrows[type != 0 ? i : i + 1],
               "qtable",
-              solutions[i],
+              rowSolution,
               answers[i],
             );
           }
         }
       } else qtable.innerHTML = "";
-
-      var canswers = 0;
-      for (let i = 0; i < solutions.length; i++) {
-        //Count correct answers.
-        if (solutions[i] && answers[i] === 1) {
-          canswers = canswers + 1;
-        } else if (!solutions[i] && answers[i] === 0) {
-          canswers = canswers + 1;
-        }
-      }
     }
     var canswerresult = document.getElementById("canswerresult");
+    let totalAnswers = answers && answers.length ? answers.length : solutions.length;
+    if (!totalAnswers) totalAnswers = 1;
     if (type == 2) {
       canswerresult.innerHTML =
         "<b>" +
-        (canswers / solutions.length == 1 ? "Correct.</b>" : "Nope.</b>");
+        (canswers / totalAnswers == 1 ? "Correct.</b>" : "Nope.</b>");
     } else {
       canswerresult.innerHTML =
         "<b>Correct answers: " +
-        Math.round((canswers / solutions.length) * 100) +
+        Math.round((canswers / totalAnswers) * 100) +
         " %</b>";
     }
 
