@@ -359,10 +359,14 @@
         leftText: leftText,
         solution: Number.isFinite(solutions[index]) ? solutions[index] : -1,
       }));
-      for (let i = leftRows.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [leftRows[i], leftRows[j]] = [leftRows[j], leftRows[i]];
-      }
+      leftRows.sort((a, b) => {
+        const aKey = a.leftText.replace(/<[^>]*>/g, "").trim();
+        const bKey = b.leftText.replace(/<[^>]*>/g, "").trim();
+        return aKey.localeCompare(bKey, undefined, {
+          sensitivity: "base",
+          numeric: true,
+        });
+      });
       qtableElement.classList.add("mapping-mode");
 
       let colgroup = document.createElement("colgroup");
@@ -398,7 +402,7 @@
       table.appendChild(tbody);
       qtableElement.innerHTML = table.innerHTML;
 
-      // Keep answers aligned with shuffled left rows.
+      // Keep answers aligned with alphabetically sorted left rows.
       storeCorrectAnswersInHtml(leftRows.map((row) => row.solution));
 
       onCheck();
