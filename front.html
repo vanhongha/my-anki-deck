@@ -412,7 +412,12 @@
 
     stripHtmlTagsFromSolutionString();
 
-    let solutions = getCorrectAnswers();
+    const optionCount = getList("Q").length;
+    let solutions = normalizeSolutionsForChoice(
+      getCorrectAnswers(),
+      type,
+      optionCount,
+    );
     let questionTableHtmlLinesToSolution = [];
     for (var i = 0; true; i++) {
       if (document.getElementById("Q_" + (i + 1)) != undefined) {
@@ -547,6 +552,43 @@
       /(<([^>]+)>)/gi,
       "",
     );
+  }
+
+  function normalizeSolutionsForChoice(rawSolutions, type, optionCount) {
+    const values = Array.isArray(rawSolutions)
+      ? rawSolutions.map((n) => Number(n)).filter((n) => Number.isFinite(n))
+      : [];
+
+    if (optionCount <= 0) {
+      return values;
+    }
+
+    const firstN = values.slice(0, optionCount);
+    const isBinaryVector =
+      firstN.length === optionCount && firstN.every((v) => v === 0 || v === 1);
+
+    if (isBinaryVector) {
+      return firstN;
+    }
+
+    if (type == 0) {
+      let normalizedKprim = Array(optionCount).fill(0);
+      for (let i = 0; i < Math.min(firstN.length, optionCount); i++) {
+        normalizedKprim[i] = firstN[i] === 1 ? 1 : 0;
+      }
+      return normalizedKprim;
+    }
+
+    let normalized = Array(optionCount).fill(0);
+    for (let i = 0; i < values.length; i++) {
+      let v = values[i];
+      if (v >= 1 && v <= optionCount) {
+        normalized[v - 1] = 1; // 1-based answer ids
+      } else if (v >= 0 && v < optionCount) {
+        normalized[v] = 1; // 0-based answer ids fallback
+      }
+    }
+    return normalized;
   }
 
   /**
