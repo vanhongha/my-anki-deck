@@ -1,4 +1,4 @@
-<script>
+﻿<script>
     // Loading Persistence
     // https://github.com/SimonLammer/anki-persistence
     // v0.5.2 - https://github.com/SimonLammer/anki-persistence/blob/62463a7f63e79ce12f7a622a8ca0beb4c1c5d556/script.js
@@ -80,20 +80,7 @@
             // ===== Mapping type = 3 =====
 if (type == 3) {
 
-    function getList(prefix) {
-        let arr = [];
-        for (let i = 1; i <= 10; i++) {
-            let el = document.getElementById(prefix + "_" + i);
-            if (!el) break;
-            let t = (el.innerHTML || "").trim();
-            if (t !== "") arr.push(t);
-        }
-        return arr;
-    }
-
-    const rights = getList("R");
-
-    // tạo atable = clone qtable (giống logic cũ)
+    // Clone atable from qtable (same layout as front)
     var output = document.getElementById("output");
     var atable = qtable.cloneNode(true);
     atable.setAttribute("id", "atable");
@@ -105,21 +92,25 @@ if (type == 3) {
     let correctCount = 0;
     let total = 0;
 
-    // row 0 là header
+    // row 0 is header
     for (let i = 1; i < qrows.length; i++) {
         const idx = i - 1;
-        const user = Number(answers[idx]);
-        const sol = Number(solutions[idx]);
+        let qSel = qrows[i].querySelector("select");
+
+        const rawUser = Number(answers[idx]);
+        const user = Number.isFinite(rawUser) ? rawUser : -1;
+
+        const rowSolution = qSel ? Number(qSel.getAttribute("data-solution")) : NaN;
+        const fallbackSolution = Number(solutions[idx]);
+        const sol = Number.isFinite(rowSolution) ? rowSolution : (Number.isFinite(fallbackSolution) ? fallbackSolution : -1);
         total++;
 
-        // set + disable dropdown ở qtable theo user
-        let qSel = qrows[i].querySelector("select");
+        // set + disable dropdown in qtable using saved user answer
         if (qSel) {
             qSel.value = String(user);
             qSel.disabled = true;
         }
 
-        // highlight đúng/sai + ghi đáp án đúng nếu sai
         const isCorrect = (user === sol);
         if (isCorrect) correctCount++;
 
@@ -137,13 +128,15 @@ if (type == 3) {
                 rightCell.appendChild(hint);
             }
             if (isCorrect) {
-                hint.innerHTML = "✅ Đúng";
+                hint.innerHTML = "✅Correct";
             } else {
-                hint.innerHTML = "❌ Sai";
+                const correctOption = qSel ? qSel.querySelector('option[value="' + sol + '"]') : null;
+                const correctText = correctOption ? correctOption.textContent.trim() : String(sol);
+                hint.innerHTML = "❌Wrong. Correct: " + correctText;
             }
         }
 
-        // set dropdown ở atable theo đáp án đúng
+        // set dropdown in atable using correct answer
         let aSel = arows[i].querySelector("select");
         if (aSel) {
             aSel.value = String(sol);
@@ -151,7 +144,7 @@ if (type == 3) {
         }
     }
 
-    // hiển thị % đúng
+    // show correct percentage
     var canswerresult = document.getElementById("canswerresult");
     const pct = total ? Math.round((correctCount / total) * 100) : 0;
     canswerresult.innerHTML = "<b>Correct answers: " + pct + " % (" + correctCount + "/" + total + ")</b>";
@@ -283,3 +276,4 @@ if (type == 3) {
         waitForReadyStateAndRun();
     }
 </script>
+
