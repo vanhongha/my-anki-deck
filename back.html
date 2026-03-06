@@ -119,6 +119,10 @@
     box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
   }
 
+  colgroup {
+    width: 1000px;
+  }
+
   #qtable,
   #atable {
     width: 99%;
@@ -653,16 +657,11 @@
                 const correctText = correctOption
                   ? correctOption.textContent.trim()
                   : String(sol);
-                hint.innerHTML =
-                  "Correct Answer: " + correctText;
+                hint.innerHTML = "Correct Answer: " + correctText;
               }
             }
             attachFeedbackChips(rightCell, {
-              outcomeText: isCorrect
-                ? "✓"
-                : user === -1
-                  ? "✗"
-                  : "✗",
+              outcomeText: isCorrect ? "✓" : user === -1 ? "✗" : "✗",
               outcomeTone: isCorrect ? "ok" : "bad",
             });
           }
@@ -782,12 +781,12 @@
       } else qtable.innerHTML = "";
     }
     var canswerresult = document.getElementById("canswerresult");
-    let totalAnswers = answers && answers.length ? answers.length : solutions.length;
+    let totalAnswers =
+      answers && answers.length ? answers.length : solutions.length;
     if (!totalAnswers) totalAnswers = 1;
     if (type == 2) {
       canswerresult.innerHTML =
-        "<b>" +
-        (canswers / totalAnswers == 1 ? "Correct.</b>" : "Nope.</b>");
+        "<b>" + (canswers / totalAnswers == 1 ? "Correct.</b>" : "Nope.</b>");
     } else {
       canswerresult.innerHTML =
         "<b>Correct answers: " +
