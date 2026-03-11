@@ -1,5 +1,18 @@
-<div id="word" style="font-family: Arial; font-size: 100px; color: black">
-  {{Ý nghĩa}}
+<div class="memphis-wrapper">
+  <div class="header-deco"></div>
+
+  {{#Picture}}
+  <div class="image-frame">
+    <div class="image-content">{{Picture}}</div>
+  </div>
+  {{/Picture}}
+
+  <div class="definitions-container center-hints">
+    {{#Ý nghĩa}}
+    <div class="def-box def-vi">
+      <span class="label">Ý NGHĨA</span>
+      {{Ý nghĩa}}
+    </div>
+    {{/Ý nghĩa}}
+  </div>
 </div>
-<hr />
-{{Picture}}

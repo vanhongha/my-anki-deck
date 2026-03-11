@@ -1,1 +1,25 @@
-<span id="word"> {{Từ Vựng}} </span>
+<div class="memphis-wrapper">
+  <div class="header-deco"></div>
+
+  <div class="card-content">
+    <div class="vocab-box">
+      <span id="word" class="vocab">{{Từ Vựng}}</span>
+    </div>
+
+    <div class="meta-data">
+      {{#Cách Đọc}}
+      <span class="pill ipa">{{Cách Đọc}}</span>
+      {{/Cách Đọc}}
+      {{#Hán Việt}}
+      <span class="pill hanviet">{{Hán Việt}}</span>
+      {{/Hán Việt}}
+      {{#Độ phổ biến}}
+      <span class="pill popularity">{{Độ phổ biến}}</span>
+      {{/Độ phổ biến}}
+    </div>
+
+    {{#Audio}}
+    <div class="audio-container">{{Audio}}</div>
+    {{/Audio}}
+  </div>
+</div>

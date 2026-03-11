@@ -1,57 +1,104 @@
-<div
-  style="font-family: Arial; font-size: 30px; color: black; text-align: left"
->
-  {{Từ Vựng}}
-  <span style="font-size: 15pt; margin-left: 20px; background-color: #63c1ff"
-    >{{Độ phổ biến}}</span
-  >
+<div class="memphis-wrapper">
+  <div class="header-deco"></div>
 
-  <div
-    style="font-family: Arial; font-size: 20px; color: blue; text-align: left"
-  >
-    {{Hán Việt}}
-    <div
-      style="
-        font-family: Arial;
-        font-size: 20px;
-        color: green;
-        text-align: left;
-      "
-    >
+  <div class="definitions-container center-hints">
+    {{#Ý nghĩa}}
+    <div class="def-box def-vi">
+      <span class="label">Ý NGHĨA</span>
+      {{Ý nghĩa}}
+    </div>
+    {{/Ý nghĩa}}
+  </div>
+</div>
+
+<hr id="answer" />
+
+<div class="memphis-wrapper back-side">
+  <div class="vocab-box">
+    <span id="word" class="vocab">{{Từ Vựng}}</span>
+  </div>
+
+  <div class="meta-data">
+    {{#Cách Đọc}}
+    <span class="pill ipa">{{Cách Đọc}}</span>
+    {{/Cách Đọc}}
+    {{#Hán Việt}}
+    <span class="pill hanviet">{{Hán Việt}}</span>
+    {{/Hán Việt}}
+    {{#Độ phổ biến}}
+    <span class="pill popularity">{{Độ phổ biến}}</span>
+    {{/Độ phổ biến}}
+  </div>
+
+  {{#Audio}}
+  <div class="audio-container">{{Audio}}</div>
+  {{/Audio}}
+
+  <div class="definitions-container">
+    {{#Ý nghĩa}}
+    <div class="def-box def-vi">
+      <span class="label">Ý NGHĨA</span>
+      {{Ý nghĩa}}
+    </div>
+    {{/Ý nghĩa}}
+
+    {{#Hán Việt}}
+    <div class="def-box def-en">
+      <span class="label">HÁN VIỆT</span>
+      {{Hán Việt}}
+    </div>
+    {{/Hán Việt}}
+
+    {{#Cách Đọc}}
+    <div class="def-box def-reading">
+      <span class="label">CÁCH ĐỌC</span>
       {{Cách Đọc}}
+    </div>
+    {{/Cách Đọc}}
+  </div>
 
-      <hr id="answer" />
-      <div
-        style="
-          font-family: Arial;
-          font-size: 20px;
-          color: blue;
-          text-align: left;
-        "
-      >
-        Ý Nghĩa:<br />
-        {{Ý nghĩa}}
-        <div
-          style="
-            font-family: Arial;
-            font-size: 20px;
-            color: black;
-            text-align: left;
-          "
-        >
-          <hr />
-          Liên quan:<br />
-          {{Liên Quan}}
-          <hr />
-          Đồng Nghĩa: <br />{{Đồng Nghĩa}}
-          <hr />
-          {{Ví dụ}}
-          <hr />
-          {{Picture}}
-          <hr />
-          {{Audio}}
-        </div>
-      </div>
+  {{#EX1}}
+  <div class="section-block examples">
+    <div class="section-title">VÍ DỤ</div>
+    <div class="example-item">
+      <div class="ex-text">{{EX1}}</div>
+      {{#Meaning_EX1}}
+      <div class="ex-meaning">-> {{Meaning_EX1}}</div>
+      {{/Meaning_EX1}}
+    </div>
+    {{#EX2}}
+    <div class="example-item">
+      <div class="ex-text">{{EX2}}</div>
+      {{#Meaning_EX2}}
+      <div class="ex-meaning">-> {{Meaning_EX2}}</div>
+      {{/Meaning_EX2}}
+    </div>
+    {{/EX2}}
+  </div>
+  {{/EX1}}
+
+  <div class="grid-2-col">
+    {{#Liên Quan}}
+    <div class="small-card related">
+      <strong>LIÊN QUAN</strong><br />
+      <span class="small-text">{{Liên Quan}}</span>
+    </div>
+    {{/Liên Quan}}
+
+    {{#Đồng Nghĩa}}
+    <div class="small-card synonyms">
+      <strong>ĐỒNG NGHĨA</strong><br />
+      <span class="small-text">{{Đồng Nghĩa}}</span>
+    </div>
+    {{/Đồng Nghĩa}}
+  </div>
+
+  {{#Picture}}
+  <div class="section-block">
+    <div class="section-title">HÌNH ẢNH</div>
+    <div class="image-frame">
+      <div class="image-content">{{Picture}}</div>
     </div>
   </div>
+  {{/Picture}}
 </div>
