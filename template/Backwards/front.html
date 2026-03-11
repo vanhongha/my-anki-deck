@@ -1,0 +1,40 @@
+<div class="memphis-wrapper">
+  <!-- Decorative Header -->
+  <div class="header-deco">
+    <div class="shape-circle"></div>
+    <div class="shape-triangle"></div>
+  </div>
+
+  <!-- 1. IMAGE: Visual Hint (Center & Impressive) -->
+  {{#Image}}
+  <div class="image-frame">
+    <div class="image-bg-deco"></div>
+    <div class="image-content">{{Image}}</div>
+  </div>
+  {{/Image}}
+
+  <!-- 2. MAIN HINT: Definition VI (Highlighted) -->
+  <div class="definitions-container center-hints">
+    {{#Definition_VI}}
+    <div class="def-box def-vi">
+      <span class="label">MEANING</span>
+      {{Definition_VI}}
+    </div>
+    {{/Definition_VI}}
+
+    <!-- 3. SUB HINTS: POS & EN -->
+    <div class="sub-hints">
+      {{#Part of speech}}
+      <span class="pill pos">{{Part of speech}}</span>
+      {{/Part of speech}} {{#Definition_EN}}
+      <span class="hint-text">({{Definition_EN}})</span>
+      {{/Definition_EN}}
+    </div>
+  </div>
+
+  <!-- 4. TYPING AREA -->
+  <div class="type-section">
+    <div class="type-label">Gõ từ vựng bên dưới:</div>
+    {{type:Vocab}}
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="memphis-wrapper">
+  <!-- Decorative Header -->
+  <div class="header-deco">
+    <div class="shape-circle"></div>
+    <div class="shape-triangle"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="card-content">
+    <div class="vocab-box">
+      <span class="vocab">{{Vocab}}</span>
+    </div>
+
+    <div class="meta-data">
+      {{#IPA}}
+      <span class="pill ipa">/{{IPA}}/</span>
+      {{/IPA}} {{#Part of speech}}
+      <span class="pill pos">{{Part of speech}}</span>
+      {{/Part of speech}}
+    </div>
+
+    <!-- Audio auto-hidden but playable -->
+    <div class="audio-container">{{Audio_Vocab}}</div>
+  </div>
+</div>

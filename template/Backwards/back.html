@@ -1,0 +1,72 @@
+<div class="memphis-wrapper">
+  <!-- Decorative Header -->
+  <div class="header-deco">
+    <div class="shape-circle"></div>
+    <div class="shape-triangle"></div>
+  </div>
+
+  <!-- 1. IMAGE: Visual Hint (Center & Impressive) -->
+  {{#Image}}
+  <div class="image-frame">
+    <div class="image-bg-deco"></div>
+    <div class="image-content">{{Image}}</div>
+  </div>
+  {{/Image}}
+
+  <!-- 2. MAIN HINT: Definition VI (Highlighted) -->
+  <div class="definitions-container center-hints">
+    {{#Definition_VI}}
+    <div class="def-box def-vi">
+      <span class="label">MEANING</span>
+      {{Definition_VI}}
+    </div>
+    {{/Definition_VI}}
+
+    <!-- 3. SUB HINTS: POS & EN -->
+    <div class="sub-hints">
+      {{#Part of speech}}
+      <span class="pill pos">{{Part of speech}}</span>
+      {{/Part of speech}} {{#Definition_EN}}
+      <span class="hint-text">({{Definition_EN}})</span>
+      {{/Definition_EN}}
+    </div>
+  </div>
+
+  <!-- 4. TYPING AREA -->
+  <div class="type-section">
+    <div class="type-label">>> KIỂM TRA KẾT QUẢ</div>
+    {{type:Vocab}}
+  </div>
+</div>
+
+<div class="memphis-wrapper back-side">
+  <!-- Result Header -->
+  <div class="vocab-box">
+    <span class="vocab">{{Vocab}}</span>
+    /{{IPA}}/
+  </div>
+
+  <div class="audio-container">{{Audio_Vocab}}</div>
+
+  <!-- Extra Info (Examples/Synonyms) -->
+  {{#Example1}}
+  <div class="section-block examples">
+    <div class="section-title">CONTEXT</div>
+    <div class="example-item">
+      <div class="ex-text">{{Example1}}</div>
+      <div class="ex-meaning">➝ {{Meaning_EX1}}</div>
+    </div>
+    <div class="example-item">
+      <div class="ex-text">{{Example2}}</div>
+      <div class="ex-meaning">➝ {{Meaning_EX2}}</div>
+    </div>
+  </div>
+  {{/Example1}} {{#Syn}}
+  <div class="grid-2-col">
+    <div class="small-card syn"><strong>SYN:</strong> {{Syn}}</div>
+    {{#Ant}}
+    <div class="small-card ant"><strong>ANT:</strong> {{Ant}}</div>
+    {{/Ant}}
+  </div>
+  {{/Syn}}
+</div>

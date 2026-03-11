@@ -1,0 +1,484 @@
+/* --- MEMPHIS THEME VARIABLES --- */
+:root {
+  --bg-color: #f0f0f0;
+  --card-bg: #ffffff;
+  --c-primary: #ff6b6b; /* Pink/Red */
+  --c-accent: #ffd93d; /* Yellow */
+  --c-secondary: #48dbfb; /* Cyan */
+  --c-dark: #222f3e; /* Black-ish */
+  --border-w: 3px;
+  --shadow-offset: 4px;
+  --font-main: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- BASE LAYOUT --- */
+.card {
+  font-family: var(--font-main);
+  font-size: 18px;
+  background-color: var(--bg-color);
+  /* Tạo nền chấm bi đặc trưng Memphis */
+  background-image:
+    radial-gradient(var(--c-secondary) 15%, transparent 16%),
+    radial-gradient(var(--c-primary) 15%, transparent 16%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    10px 10px;
+  color: var(--c-dark);
+  margin: 0;
+  padding: 20px 10px; /* Padding nhỏ cho mobile */
+  text-align: center;
+}
+
+/* --- MAIN CONTAINER (The 800px constraint) --- */
+.memphis-wrapper {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: var(--border-w) solid var(--c-dark);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--c-dark);
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.back-side {
+  margin-top: 20px;
+  border-top: none; /* Ghép nối nếu muốn hoặc tách rời */
+}
+
+/* --- DECORATIVE HEADER --- */
+.header-deco {
+  height: 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--c-primary),
+    var(--c-primary) 10px,
+    var(--c-accent) 10px,
+    var(--c-accent) 20px
+  );
+  margin: -20px -20px 20px -20px;
+  border-bottom: var(--border-w) solid var(--c-dark);
+}
+
+/* --- VOCAB STYLING --- */
+.vocab-box {
+  margin-bottom: 15px;
+}
+
+.vocab {
+  font-size: 2.5em;
+  font-weight: 900;
+  color: var(--c-dark);
+  text-transform: uppercase;
+  /* Hiệu ứng chữ nổi */
+  text-shadow: 3px 3px 0px var(--c-secondary);
+  display: inline-block;
+  line-height: 1.2;
+}
+
+/* --- META INFO (IPA, POS) --- */
+.meta-data {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.pill {
+  padding: 5px 15px;
+  border: 2px solid var(--c-dark);
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 0.9em;
+  box-shadow: 2px 2px 0px var(--c-dark);
+}
+
+.ipa {
+  background-color: #fff;
+}
+.pos {
+  background-color: var(--c-secondary);
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* --- IMAGE SECTION (Impressive Center) --- */
+.image-frame {
+  position: relative;
+  margin: 20px auto;
+  display: inline-block; /* Để khung ôm vừa ảnh */
+  max-width: 100%;
+}
+
+.image-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 400px; /* Giới hạn chiều cao */
+  border: var(--border-w) solid var(--c-dark);
+  box-shadow: 6px 6px 0px var(--c-dark); /* Bóng đổ lớn hơn cho ảnh */
+  background: #fff;
+  object-fit: contain;
+}
+
+/* --- DEFINITIONS --- */
+.definitions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.def-box {
+  padding: 15px;
+  border: 2px solid var(--c-dark);
+  position: relative;
+}
+
+.def-en {
+  background-color: #fff;
+}
+
+/* NỔI BẬT NGHĨA TIẾNG VIỆT */
+.def-vi {
+  background-color: var(--c-accent); /* Vàng rực */
+  font-weight: bold;
+  font-size: 1.1em;
+  box-shadow: 4px 4px 0px var(--c-dark); /* Bóng đổ tạo khối */
+  transform: rotate(-0.5deg); /* Nghiêng nhẹ tạo nét tinh nghịch */
+}
+
+.label {
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  background: var(--c-dark);
+  color: #fff;
+  font-size: 0.7em;
+  padding: 2px 8px;
+  font-weight: bold;
+}
+
+/* --- EXAMPLES & EXTRAS --- */
+.section-block {
+  margin-top: 25px;
+  text-align: left;
+  border-top: 2px dashed var(--c-dark);
+  padding-top: 15px;
+}
+
+.section-title {
+  font-weight: 900;
+  background: var(--c-primary);
+  color: #fff;
+  display: inline-block;
+  padding: 2px 10px;
+  border: 2px solid var(--c-dark);
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.example-item {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 4px solid var(--c-secondary);
+}
+
+.ex-text {
+  font-style: italic;
+}
+.ex-meaning {
+  color: #555;
+  font-size: 0.9em;
+}
+
+/* --- GRID FOR SYN/ANT --- */
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.small-card {
+  border: 2px solid var(--c-dark);
+  padding: 10px;
+  text-align: left;
+  background: #fff;
+}
+
+.syn {
+  border-bottom: 4px solid var(--c-secondary);
+}
+.ant {
+  border-bottom: 4px solid var(--c-primary);
+}
+
+.small-text {
+  font-size: 0.85em;
+  color: #666;
+  display: block;
+  margin-top: 4px;
+}
+
+/* --- MOBILE RESPONSIVE TWEAKS --- */
+@media (max-width: 600px) {
+  .vocab {
+    font-size: 2em;
+  }
+  .grid-2-col {
+    grid-template-columns: 1fr;
+  } /* Chuyển thành 1 cột trên đt */
+  .memphis-wrapper {
+    padding: 15px;
+    width: 95%;
+  }
+  .image-content img {
+    max-height: 250px;
+  }
+}
+
+/* --- TYPE-IN SPECIFIC STYLES --- */
+
+/* Căn giữa các gợi ý cho thẻ gõ */
+.center-hints {
+  align-items: center; /* Căn giữa theo trục dọc */
+  text-align: center;
+}
+
+.sub-hints {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.hint-text {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* KHUNG NHẬP LIỆU (Input Field) */
+.type-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px dashed var(--c-dark);
+}
+
+.type-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tùy chỉnh ô input của Anki */
+input#typeans {
+  font-family: "Courier New", monospace; /* Font kiểu máy đánh chữ */
+  font-size: 1.2rem;
+  padding: 10px;
+  width: 80%;
+  text-align: center;
+  border: 3px solid var(--c-dark);
+  background-color: #fff;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  outline: none;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+input#typeans:focus {
+  background-color: #e8faff; /* Màu nền sáng khi focus */
+  box-shadow: 2px 2px 0px var(--c-dark); /* Nhấn nút xuống */
+  transform: translate(2px, 2px);
+}
+
+/* --- KẾT QUẢ SO SÁNH (Back Side) --- */
+/* Đây là thẻ code Anki sinh ra để so sánh đúng sai */
+
+code#typeans {
+  font-family: "Courier New", monospace;
+  font-size: 1.3em;
+  padding: 15px;
+  display: block;
+  margin-top: 15px;
+  background: #fff;
+  border: 3px solid var(--c-dark);
+  box-shadow: 4px 4px 0px var(--c-dark);
+}
+
+/* Phần gõ đúng (Green) */
+.typeGood {
+  background-color: #d1ffd6; /* Xanh nhạt */
+  color: #006400;
+  font-weight: bold;
+  padding: 2px 5px;
+}
+
+/* Phần gõ sai (Red) */
+.typeBad {
+  background-color: #ffcccc; /* Đỏ nhạt */
+  color: #cc0000;
+  font-weight: bold;
+  text-decoration: line-through;
+  padding: 2px 5px;
+}
+
+/* Phần gõ thiếu (Grey) */
+.typeMissed {
+  background-color: #eee;
+  color: #555;
+  padding: 2px 5px;
+}
+
+/* Responsive cho ô input trên mobile */
+@media (max-width: 600px) {
+  input#typeans {
+    width: 100%; /* Full width trên điện thoại */
+    font-size: 1.1rem;
+  }
+
+  code#typeans {
+    font-size: 1.1em;
+    padding: 10px;
+  }
+}
+
+/* =========================================
+   NIGHT MODE / DARK THEME CONFIGURATION
+   Style: Dark Memphis / Retrowave
+   ========================================= */
+
+/* Anki tự động thêm class .nightMode vào body khi bật chế độ tối */
+.nightMode {
+  /* --- REDEFINE VARIABLES FOR DARK MODE --- */
+  --bg-color: #121212; /* Nền app tối hẳn */
+  --card-bg: #1e272e; /* Nền thẻ màu than chì/xanh đen */
+
+  /* Màu Neon Pastel dịu mắt hơn trên nền tối */
+  --c-primary: #ff7675; /* Hồng Pastel */
+  --c-accent: #f1c40f; /* Vàng đậm (tránh chói) */
+  --c-secondary: #7ed6df; /* Cyan dịu */
+
+  /* QUAN TRỌNG: Đổi màu viền và chữ chính sang sáng */
+  --c-dark: #ecf0f1; /* Trắng xám (thay cho đen) */
+
+  /* Biến riêng cho bóng đổ trong night mode (giữ bóng đen) */
+  --shadow-color: #000000;
+}
+
+/* --- OVERRIDES CHO CÁC THÀNH PHẦN CỤ THỂ --- */
+
+.nightMode .card {
+  color: var(--c-dark);
+  /* Pattern chấm bi mờ hơn */
+  background-image:
+    radial-gradient(rgba(126, 214, 223, 0.2) 15%, transparent 16%),
+    radial-gradient(rgba(255, 118, 117, 0.2) 15%, transparent 16%);
+}
+
+.nightMode .memphis-wrapper {
+  /* Bóng đổ đen tuyền để tách biệt với nền */
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--shadow-color);
+  border-color: var(--c-dark);
+}
+
+/* Xử lý chữ Vocab */
+.nightMode .vocab {
+  color: var(--c-accent); /* Đổi chữ sang vàng/trắng */
+  text-shadow: 3px 3px 0px var(--c-primary); /* Bóng chữ màu hồng */
+}
+
+/* Xử lý các nhãn (Pill/Label) */
+.nightMode .pill {
+  box-shadow: 2px 2px 0px var(--shadow-color); /* Bóng đen */
+  color: #1e272e; /* Chữ trong pill màu tối cho dễ đọc trên nền sáng */
+}
+.nightMode .ipa {
+  color: #000; /* IPA nền trắng nên chữ phải đen */
+}
+
+/* Xử lý Nghĩa Tiếng Việt (Quan trọng) */
+.nightMode .def-vi {
+  background-color: #b38f00; /* Vàng tối hơn (Dark Gold) để không chói mắt */
+  color: #fff;
+  border-color: var(--c-dark);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+.nightMode .def-vi .label {
+  background-color: var(--c-dark);
+  color: var(--card-bg);
+}
+
+/* Xử lý Ảnh */
+.nightMode .image-content img {
+  opacity: 0.9; /* Giảm độ sáng ảnh một chút */
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  border-color: var(--c-dark);
+}
+
+/* Xử lý các khối Example/Synonym */
+.nightMode .section-title {
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  color: #000; /* Chữ trên nền màu phải tối */
+  border-color: var(--c-dark);
+}
+
+.nightMode .small-card {
+  background: #2f3640; /* Nền card nhỏ tối hơn chút */
+  color: #fff;
+  border-color: var(--c-dark);
+}
+.nightMode .small-text {
+  color: #bdc3c7; /* Chữ phụ màu xám sáng */
+}
+.nightMode .ex-meaning {
+  color: #bdc3c7;
+}
+
+/* --- XỬ LÝ PHẦN GÕ (TYPE-IN) CHO DARK MODE --- */
+
+.nightMode input#typeans {
+  background-color: #2f3640; /* Nền input tối */
+  color: #fff; /* Chữ trắng */
+  border-color: var(--c-dark);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.nightMode input#typeans:focus {
+  background-color: #353b48;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+/* Kết quả so sánh */
+.nightMode code#typeans {
+  background: #2f3640;
+  border-color: var(--c-dark);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  color: #fff;
+}
+
+/* Màu đúng sai trong night mode cần chỉnh lại cho êm dịu */
+.nightMode .typeGood {
+  background-color: #1e5631; /* Xanh đậm */
+  color: #a3ffac; /* Chữ xanh sáng */
+}
+
+.nightMode .typeBad {
+  background-color: #68222d; /* Đỏ đậm */
+  color: #ffb8b8; /* Chữ đỏ sáng */
+}
+
+.nightMode .typeMissed {
+  background-color: #555;
+  color: #ccc;
+}

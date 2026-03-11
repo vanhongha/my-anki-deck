@@ -1,0 +1,61 @@
+{{FrontSide}}
+
+<div class="memphis-wrapper back-side">
+  <div class="divider-pattern"></div>
+
+  <!-- Image Section: Impressive Center Display -->
+  {{#Image}}
+  <div class="image-frame">
+    <div class="image-bg-deco"></div>
+    <div class="image-content">{{Image}}</div>
+  </div>
+  {{/Image}}
+
+  <!-- Definitions -->
+  <div class="definitions-container">
+    {{#Definition_EN}}
+    <div class="def-box def-en">
+      <span class="label">ENG</span>
+      <span class="hint-text">({{Definition_EN}})</span>
+    </div>
+    {{/Definition_EN}} {{#Definition_VI}}
+    <div class="def-box def-vi">
+      <span class="label">VIE</span>
+      {{Definition_VI}}
+    </div>
+    {{/Definition_VI}}
+  </div>
+
+  <!-- Examples -->
+  {{#Example1}}
+  <div class="section-block examples">
+    <div class="section-title">EXAMPLES</div>
+    <div class="example-item">
+      <div class="ex-text">{{Example1}}</div>
+      <div class="ex-meaning">➝ {{Meaning_EX1}}</div>
+    </div>
+    {{#Example2}}
+    <div class="example-item">
+      <div class="ex-text">{{Example2}}</div>
+      <div class="ex-meaning">➝ {{Meaning_EX2}}</div>
+    </div>
+    {{/Example2}}
+  </div>
+  {{/Example1}}
+
+  <!-- Synonyms & Antonyms Grid -->
+  {{#Syn}}
+  <div class="grid-2-col">
+    <div class="small-card syn">
+      <strong>SYN:</strong> {{Syn}} <br />
+      <span class="small-text">{{Meaning_SYN}}</span>
+    </div>
+    {{#Ant}}
+    <div class="small-card ant">
+      <strong>ANT:</strong> {{Ant}} <br />
+      <span class="small-text">{{Meaning_ANT}}</span>
+    </div>
+    {{/Ant}}
+  </div>
+  {{/Syn}}
+</div>
